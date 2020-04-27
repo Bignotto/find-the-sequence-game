@@ -1,0 +1,23 @@
+.title-container {
+  width: 75%;
+  max-width: 1180px;
+  padding: 0 30px;
+  margin: 32px auto;
+  background-color: green;
+}
+
+.title-text {
+  font-family: Roboto, sans-serif;
+  color: #202020;
+  font-size: 36px;
+  font-weight: bold;
+  background-color: greenyellow;
+  line-height: 42px;
+}
+
+.text {
+  font-family: Roboto, sans-serif;
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+}
