@@ -1,0 +1,23 @@
+.game-container {
+  width: 75%;
+  max-width: 1180px;
+  padding: 0 30px;
+  margin: 32px auto;
+  background-color: purple;
+}
+
+.game-container ul {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  list-style: none;
+  grid-gap: 24px;
+}
+
+li {
+  font-family: Roboto, sans-serif;
+  font-size: 44px;
+  font-weight: bolder;
+  border: white;
+  border-style: solid;
+  align-items: center;
+}
