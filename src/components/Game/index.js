@@ -54,9 +54,14 @@ export default class GameGrid extends React.Component {
   handleClick() {
     console.log("Click!");
 
+    //if there is a game running
     if (this.state.timeElapsed > 0) {
+      //handles the click when game runnign
+      //TODO: need to mark that number as clicked, then show it to the user!
       return;
     }
+
+    //when no game is running
     if (!this.interval) {
       console.log("GameStart!");
       this.setState({
@@ -129,7 +134,7 @@ export default class GameGrid extends React.Component {
                   <button
                     type="button"
                     className="button-text"
-                    onClick={() => this.handleClick(`clicou no ${num}`)}
+                    onClick={() => this.handleClick()}
                   >
                     {num}
                   </button>
