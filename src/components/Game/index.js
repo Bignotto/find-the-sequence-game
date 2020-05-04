@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import "./index.css";
 
@@ -46,30 +46,39 @@ export default class GameGrid extends React.Component {
     console.log("S T O P");
     clearInterval(this.interval);
     this.interval = null;
+    this.setState({
+      isRunning: false,
+    });
   }
 
   handleClick() {
     console.log("Click!");
 
-    //TODO: handle game states
-    //stop button stops the clock
-    //restart button generate new numbers
-    //check if elapsed time is zero to decide if new numbers are needed
+    if (this.state.timeElapsed > 0) {
+      return;
+    }
     if (!this.interval) {
       console.log("GameStart!");
       this.setState({
         timeElapsed: 0,
         date: Date.now(),
+        isRunning: true,
       });
       this.interval = setInterval(this.updateTime, 10);
       return;
     }
   }
 
+  handleNewGame() {
+    this.setState({
+      timeElapsed: 0,
+      gameNumbers: this.newGame(SIZE),
+    });
+  }
+
   newGame(size) {
     let numbers1 = [];
     let numbers2 = [];
-    let numberObj;
 
     const max = size * size;
 
@@ -133,8 +142,8 @@ export default class GameGrid extends React.Component {
           <button className="game-button" onClick={() => this.stopGame()}>
             Stop
           </button>
-          <button className="game-button" onClick={() => this.stopGame()}>
-            Ranking
+          <button className="game-button" onClick={() => this.handleNewGame()}>
+            New Game
           </button>
           <button className="game-button">Share</button>
         </div>
