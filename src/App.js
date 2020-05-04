@@ -10,8 +10,8 @@ function App() {
   return (
     <>
       <AppTitle />
-      <Time />
-      {/* <Game /> */}
+      {/* <Time /> */}
+      <Game />
       {/* <Buttons /> */}
     </>
   );

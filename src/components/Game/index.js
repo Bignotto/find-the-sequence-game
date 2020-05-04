@@ -4,13 +4,40 @@ import "./index.css";
 
 const SIZE = 5;
 
-export default function GameGrid() {
-  const [time, setTime] = useState(0);
-  const [startTime, setStartTime] = useState(0);
+export default class GameGrid extends React.Component {
+  constructor(props) {
+    super(props);
+    this.updateDate = this.updateDate.bind(this);
 
-  let timer;
+    this.state = {
+      timeElapsed: 0,
+      date: Date.now(),
+    };
+  }
 
-  function newGame(size) {
+  updateDate() {
+    const delta = Date.now() - this.state.date;
+    this.setState({
+      timeElapsed: this.state.timeElapsed + delta,
+      date: Date.now(),
+    });
+  }
+
+  handleRestart() {
+    console.log("START");
+    this.interval = setInterval(this.updateDate, 1000);
+  }
+
+  handleRanking() {
+    console.log("S T O P");
+    clearInterval(this.interval);
+  }
+
+  handleClick(message) {
+    alert(message);
+  }
+
+  newGame(size) {
     let numbers = [];
     let numberObj;
 
@@ -22,71 +49,39 @@ export default function GameGrid() {
     return numbers;
   }
 
-  useEffect(() => {
-    console.log("time changed", time);
-  }, []);
-
-  function start() {
-    setStartTime(Date.now());
-    timer = setInterval(update(), 1000);
+  render() {
+    return (
+      <>
+        <div className="time-container">
+          <p>{this.state.timeElapsed}</p>
+        </div>
+        <div className="game-container">
+          <ul>
+            {this.newGame(SIZE).map((num) => (
+              <li key={num}>
+                <div className="game-cell">
+                  <button
+                    type="button"
+                    className="button-text"
+                    onClick={() => this.handleClick(`clicou no ${num}`)}
+                  >
+                    {num}
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="button-container">
+          <button className="game-button" onClick={() => this.handleRestart()}>
+            Restart
+          </button>
+          <button className="game-button" onClick={() => this.handleRanking()}>
+            Ranking
+          </button>
+          <button className="game-button">Share</button>
+        </div>
+      </>
+    );
   }
-
-  function stop() {
-    clearInterval(timer);
-    setTime(0);
-  }
-
-  function update() {
-    const delta = Date.now() - startTime;
-    setTime(time + delta);
-    console.log(time);
-  }
-
-  function handleClick(texto) {
-    alert(texto);
-  }
-
-  function handleRestart() {
-    console.log("START");
-    start();
-  }
-
-  function handleRanking() {
-    console.log("S T O P");
-    stop();
-  }
-
-  return (
-    <>
-      <div className="time-container">
-        <p>{time}</p>
-      </div>
-      <div className="game-container">
-        <ul>
-          {newGame(SIZE).map((num) => (
-            <li key={num}>
-              <div className="game-cell">
-                <button
-                  type="button"
-                  className="button-text"
-                  onClick={() => handleClick(`clicou no ${num}`)}
-                >
-                  {num}
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="button-container">
-        <button className="game-button" onClick={handleRestart}>
-          Restart
-        </button>
-        <button className="game-button" onClick={handleRanking}>
-          Ranking
-        </button>
-        <button className="game-button">Share</button>
-      </div>
-    </>
-  );
 }

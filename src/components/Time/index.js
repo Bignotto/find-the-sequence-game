@@ -13,9 +13,9 @@ export default class Time extends React.Component {
     };
   }
 
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
+  // componentWillUnmount() {
+  //   clearInterval(this.interval);
+  // }
 
   updateDate() {
     const delta = Date.now() - this.state.date;
