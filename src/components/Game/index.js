@@ -17,6 +17,7 @@ export default class GameGrid extends React.Component {
     super(props);
     this.updateTime = this.updateTime.bind(this);
 
+    this.clicked = [];
     this.state = {
       timeElapsed: 0,
       isRunning: false,
@@ -51,13 +52,18 @@ export default class GameGrid extends React.Component {
     });
   }
 
-  handleClick() {
+  handleClick(numberClicked) {
     console.log("Click!");
 
     //if there is a game running
     if (this.state.timeElapsed > 0) {
-      //handles the click when game runnign
-      //TODO: need to mark that number as clicked, then show it to the user!
+      if (
+        this.clicked.length === numberClicked - 1 &&
+        this.state.isRunning === true
+      )
+        this.clicked.push(numberClicked);
+      console.log(numberClicked, this.clicked, this.clicked.length);
+
       return;
     }
 
@@ -70,11 +76,13 @@ export default class GameGrid extends React.Component {
         isRunning: true,
       });
       this.interval = setInterval(this.updateTime, 10);
+      this.clicked.push(numberClicked);
       return;
     }
   }
 
   handleNewGame() {
+    this.clicked = [];
     this.setState({
       timeElapsed: 0,
       gameNumbers: this.newGame(SIZE),
@@ -93,7 +101,7 @@ export default class GameGrid extends React.Component {
     }
     return {
       first: this.shuffle(numbers1),
-      second: this.shuffle(numbers2),
+      second: numbers2,
     };
   }
 
@@ -133,10 +141,20 @@ export default class GameGrid extends React.Component {
                 <div className="game-cell">
                   <button
                     type="button"
-                    className="button-text"
-                    onClick={() => this.handleClick()}
+                    className={
+                      !this.clicked.includes(num)
+                        ? "button-text"
+                        : "button-text-clicked"
+                    }
+                    onClick={() =>
+                      !this.clicked.includes(num)
+                        ? this.handleClick(num)
+                        : this.handleClick(this.state.gameNumbers.second[num])
+                    }
                   >
-                    {num}
+                    {!this.clicked.includes(num)
+                      ? num
+                      : this.state.gameNumbers.second[num]}
                   </button>
                 </div>
               </li>
