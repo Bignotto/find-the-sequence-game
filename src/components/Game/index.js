@@ -54,21 +54,29 @@ export default class GameGrid extends React.Component {
 
   handleClick(numberClicked) {
     console.log("Click!");
+    console.log(this.clicked.length);
 
-    //if there is a game running
+    //if time elapsed is greater than zero, there should be a game running
     if (this.state.timeElapsed > 0) {
+      // then check if the clicked number is the right one
       if (
         this.clicked.length === numberClicked - 1 &&
         this.state.isRunning === true
       )
+        // add it to the array of clicked numbers
         this.clicked.push(numberClicked);
-      console.log(numberClicked, this.clicked, this.clicked.length);
+
+      // check if the 50th number was clicked
+      if (this.clicked.length === 50) {
+        this.win();
+      }
+      //console.log(numberClicked, this.clicked, this.clicked.length);
 
       return;
     }
 
     //when no game is running
-    if (!this.interval) {
+    if (!this.interval && this.clicked.length === numberClicked - 1) {
       console.log("GameStart!");
       this.setState({
         timeElapsed: 0,
@@ -99,6 +107,7 @@ export default class GameGrid extends React.Component {
       numbers1.push(1 + i);
       numbers2.push(25 + i);
     }
+    numbers2.push(50);
     return {
       first: this.shuffle(numbers1),
       second: numbers2,
@@ -144,13 +153,18 @@ export default class GameGrid extends React.Component {
                     className={
                       !this.clicked.includes(num)
                         ? "button-text"
+                        : this.clicked.length >= 25 &&
+                          this.clicked.includes(
+                            this.state.gameNumbers.second[num]
+                          )
+                        ? "button-text-clicked-clicked"
                         : "button-text-clicked"
                     }
-                    onClick={() =>
+                    onClick={() => {
                       !this.clicked.includes(num)
                         ? this.handleClick(num)
-                        : this.handleClick(this.state.gameNumbers.second[num])
-                    }
+                        : this.handleClick(this.state.gameNumbers.second[num]);
+                    }}
                   >
                     {!this.clicked.includes(num)
                       ? num

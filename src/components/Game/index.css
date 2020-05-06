@@ -29,6 +29,13 @@ ul {
   color: brown;
 }
 
+.button-text-clicked-clicked {
+  font-family: Roboto, sans-serif;
+  font-size: 44px;
+  font-weight: bolder;
+  color: white;
+}
+
 li {
   border: 3px solid #adadad;
   background: #eaeaea;
