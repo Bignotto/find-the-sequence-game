@@ -52,6 +52,15 @@ export default class GameGrid extends React.Component {
     });
   }
 
+  win() {
+    console.log("WIN!!");
+    clearInterval(this.interval);
+    this.interval = null;
+    this.setState({
+      isRunning: false,
+    });
+  }
+
   handleClick(numberClicked) {
     console.log("Click!");
     console.log(this.clicked.length);
