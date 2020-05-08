@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap");
 
 * {
   margin: 0;
@@ -8,15 +8,16 @@
 }
 
 body {
-  font: 400 14px Roboto, sans-serif;
-  background: #808080;
+  font: 400 14px "Roboto Mono", sans-serif;
+  background: #585858;
   -webkit-font-smoothing: antialiased;
+  align-content: center;
 }
 
 input,
 button,
 textarea {
-  font: 400 14px Roboto, sans-serif;
+  font: 400 14px "Roboto Mono", sans-serif;
 }
 
 button {

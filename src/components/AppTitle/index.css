@@ -1,23 +1,24 @@
 .title-container {
   width: 75%;
   max-width: 1180px;
-  padding: 0 30px;
-  margin: 32px auto;
-  background-color: green;
+  padding: 20px 20px;
+  margin: 0 auto;
+  background-color: #eeeeee;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 .title-text {
-  font-family: Roboto, sans-serif;
   color: #202020;
-  font-size: 36px;
+  font-size: 26px;
   font-weight: bold;
-  background-color: greenyellow;
-  line-height: 42px;
+  /* background-color: greenyellow; */
+  line-height: 26px;
 }
 
 .text {
-  font-family: Roboto, sans-serif;
   color: black;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
+  margin-top: 25px;
 }
