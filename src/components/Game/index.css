@@ -1,8 +1,14 @@
 .game-container {
   width: 75%;
   max-width: 1180px;
-  margin: 32px auto;
-  background-color: purple;
+  margin: 0 auto;
+  background-color: #eeeeee;
+}
+
+.game-grid {
+  width: 80%;
+  max-width: 1180px;
+  margin: 0 auto;
 }
 
 ul {
@@ -17,21 +23,22 @@ ul {
 }
 
 .button-text {
-  font-family: Roboto, sans-serif;
-  font-size: 44px;
+  font-family: "Roboto Mono", sans-serif;
+  font-size: 35px;
   font-weight: bolder;
+  color: #ffffff;
 }
 
 .button-text-clicked {
-  font-family: Roboto, sans-serif;
-  font-size: 44px;
+  font-family: "Roboto Mono", sans-serif;
+  font-size: 35px;
   font-weight: bolder;
   color: brown;
 }
 
 .button-text-clicked-clicked {
-  font-family: Roboto, sans-serif;
-  font-size: 44px;
+  font-family: "Roboto Mono", sans-serif;
+  font-size: 35px;
   font-weight: bolder;
   color: white;
 }
@@ -43,7 +50,7 @@ li {
 
 button {
   border: 0;
-  /* background: yellow; */
+  background: #818181;
   transition: opacity 0.2s;
   height: 100%;
   width: 100%;
@@ -59,28 +66,32 @@ button:hover {
   width: 75%;
   max-width: 1180px;
   padding: 0 30px;
-  margin: 32px auto;
-  background-color: lightgrey;
+  margin: 0 auto;
+  background-color: #eeeeee;
 }
 
 .time-container p {
-  font-family: Roboto, sans-serif;
+  font-family: "Roboto Mono", sans-serif;
   color: #202020;
   font-size: 46px;
   font-weight: bold;
-  background-color: greenyellow;
-  line-height: 42px;
+  /* background-color: greenyellow; */
+  /* line-height: 42px; */
   text-align: center;
 }
 
 .button-container {
   width: 75%;
   max-width: 1180px;
-  margin: 32px auto;
-  background-color: purple;
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  background-color: #eeeeee;
+  padding-top: 35px;
+  padding-bottom: 15px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
 }
 
 .game-button {
@@ -88,10 +99,11 @@ button:hover {
   height: 36px;
   margin: auto;
   border-radius: 4px;
-  background-color: teal;
-  font-family: Roboto, sans-serif;
+  background-color: #505050;
+  color: #ffffff;
+  font-family: "Roboto Mono", sans-serif;
   font-weight: bold;
-  font-size: 26px;
+  font-size: 20px;
 }
 
 .game-button hover {
