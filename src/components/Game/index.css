@@ -6,7 +6,7 @@
 }
 
 .game-grid {
-  width: 80%;
+  width: 60%;
   max-width: 1180px;
   margin: 0 auto;
 }
@@ -75,8 +75,6 @@ button:hover {
   color: #202020;
   font-size: 46px;
   font-weight: bold;
-  /* background-color: greenyellow; */
-  /* line-height: 42px; */
   text-align: center;
 }
 
@@ -90,13 +88,13 @@ button:hover {
   background-color: #eeeeee;
   padding-top: 35px;
   padding-bottom: 15px;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
+  /* border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px; */
 }
 
 .game-button {
   width: 30%;
-  height: 36px;
+  height: 30px;
   margin: auto;
   border-radius: 4px;
   background-color: #505050;
