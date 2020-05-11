@@ -1,25 +1,24 @@
-.title-container {
+.credits-container {
   width: 75%;
   max-width: 1180px;
   padding: 20px 20px;
-  margin: 0 auto;
-  margin-top: 10px;
   background-color: #eeeeee;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  margin: auto;
 }
 
-.title-text {
+.credits-text {
   color: #202020;
   font-size: 26px;
   font-weight: bold;
-  /* background-color: greenyellow; */
   line-height: 26px;
+}
+
+.credits-text p {
+  margin-top: 10px;
 }
 
 .text {
   color: black;
   font-size: 16px;
   font-weight: bold;
-  margin-top: 25px;
 }
