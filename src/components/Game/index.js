@@ -1,16 +1,8 @@
 import React from "react";
-
+import Time from "./time";
 import "./index.css";
 
 const SIZE = 5;
-
-const leftPad = (width, n) => {
-  if ((n + "").length > width) {
-    return n;
-  }
-  const padding = new Array(width).join("0");
-  return (padding + n).slice(-width);
-};
 
 export default class GameGrid extends React.Component {
   constructor(props) {
@@ -32,15 +24,6 @@ export default class GameGrid extends React.Component {
       timeElapsed: this.state.timeElapsed + delta,
       date: Date.now(),
     });
-  }
-
-  getUnits(timeElapsed) {
-    const seconds = timeElapsed / 1000;
-    return {
-      min: Math.floor(seconds / 60).toString(),
-      sec: Math.floor(seconds % 60).toString(),
-      msec: (seconds % 1).toFixed(3).substring(2),
-    };
   }
 
   stopGame() {
@@ -144,14 +127,13 @@ export default class GameGrid extends React.Component {
   }
 
   render() {
-    const units = this.getUnits(this.state.timeElapsed);
     return (
       <>
-        <div className="time-container">
-          <p>
-            {leftPad(2, units.min)}:{leftPad(2, units.sec)}.{units.msec}
-          </p>
-        </div>
+        <Time
+          className="time-container"
+          id="timer"
+          timeElapsed={this.state.timeElapsed}
+        />
         <div className="game-container">
           <div className="game-grid">
             <ul>
