@@ -1,5 +1,7 @@
 import React from "react";
 import Time from "./time";
+import Buttons from "./buttons";
+
 import "./index.css";
 
 const SIZE = 5;
@@ -126,6 +128,11 @@ export default class GameGrid extends React.Component {
     return array;
   }
 
+  propClick(num) {
+    console.log("Clicked!!");
+    console.log(num);
+  }
+
   render() {
     return (
       <>
@@ -170,15 +177,10 @@ export default class GameGrid extends React.Component {
             </ul>
           </div>
         </div>
-        <div className="button-container">
-          <button className="game-button" onClick={() => this.stopGame()}>
-            Stop
-          </button>
-          <button className="game-button" onClick={() => this.handleNewGame()}>
-            New Game
-          </button>
-          <button className="game-button">Share</button>
-        </div>
+        <Buttons
+          stopAction={() => this.stopGame()}
+          newAction={() => this.handleNewGame()}
+        />
       </>
     );
   }
