@@ -1,5 +1,6 @@
 import React from "react";
 import Time from "./time";
+import Grid from "./grid";
 import Buttons from "./buttons";
 
 import "./index.css";
@@ -141,42 +142,11 @@ export default class GameGrid extends React.Component {
           id="timer"
           timeElapsed={this.state.timeElapsed}
         />
-        <div className="game-container">
-          <div className="game-grid">
-            <ul>
-              {this.state.gameNumbers.first.map((num) => (
-                <li key={num}>
-                  <div className="game-cell">
-                    <button
-                      type="button"
-                      className={
-                        !this.clicked.includes(num)
-                          ? "button-text"
-                          : this.clicked.length >= 25 &&
-                            this.clicked.includes(
-                              this.state.gameNumbers.second[num]
-                            )
-                          ? "button-text-clicked-clicked"
-                          : "button-text-clicked"
-                      }
-                      onClick={() => {
-                        !this.clicked.includes(num)
-                          ? this.handleClick(num)
-                          : this.handleClick(
-                              this.state.gameNumbers.second[num]
-                            );
-                      }}
-                    >
-                      {!this.clicked.includes(num)
-                        ? num
-                        : this.state.gameNumbers.second[num]}
-                    </button>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        <Grid
+          clickAction={this.handleClick}
+          numbers={this.state.gameNumbers}
+          clicked={this.clicked}
+        />
         <Buttons
           stopAction={() => this.stopGame()}
           newAction={() => this.handleNewGame()}
