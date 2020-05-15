@@ -8,9 +8,11 @@ import "./global.css";
 function App() {
   return (
     <>
-      <AppTitle />
-      <Game />
-      <Credits />
+      <div className="app-container">
+        <AppTitle />
+        <Game />
+        <Credits />
+      </div>
     </>
   );
 }

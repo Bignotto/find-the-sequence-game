@@ -7,6 +7,13 @@
   box-sizing: border-box;
 }
 
+.app-container {
+  display: block;
+  margin: 20px auto;
+  width: 65%;
+  max-width: 1180px;
+}
+
 body {
   font: 400 14px "Roboto Mono", sans-serif;
   background: #585858;
