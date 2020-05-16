@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+
 import Time from "./time";
 import Grid from "./grid";
 import Buttons from "./buttons";
@@ -7,63 +8,58 @@ import "./index.css";
 
 const SIZE = 5;
 
-export default class GameGrid extends React.Component {
-  constructor(props) {
-    super(props);
-    this.updateTime = this.updateTime.bind(this);
+export default function GameGrid() {
+  const [timeElapsed, setTimeElapsed] = useState(0);
+  const [clicked, setClicked] = useState([]);
+  const [gameNumbers, setGameNumbers] = useState({
+    first: [],
+    second: [],
+  });
 
-    this.clicked = [];
-    this.state = {
-      timeElapsed: 0,
-      isRunning: false,
-      gameNumbers: this.newGame(SIZE),
-      date: Date.now(),
-    };
+  const [isRunning, setIsRunning] = useState(false);
+  const [date, setDate] = useState(Date.now());
+
+  let interval;
+
+  useEffect(() => {
+    handleNewGame();
+  }, []);
+
+  function updateTime() {
+    const delta = Date.now() - date;
+
+    setTimeElapsed(timeElapsed + delta);
+    setDate(Date.now());
   }
 
-  updateTime() {
-    const delta = Date.now() - this.state.date;
-    this.setState({
-      timeElapsed: this.state.timeElapsed + delta,
-      date: Date.now(),
-    });
-  }
-
-  stopGame() {
+  function stopGame() {
     console.log("S T O P");
-    clearInterval(this.interval);
-    this.interval = null;
-    this.setState({
-      isRunning: false,
-    });
+    clearInterval(interval);
+    interval = null;
+    setIsRunning(false);
   }
 
-  win() {
+  function win() {
     console.log("WIN!!");
-    clearInterval(this.interval);
-    this.interval = null;
-    this.setState({
-      isRunning: false,
-    });
+    clearInterval(interval);
+    interval = null;
+    setIsRunning(false);
   }
 
-  handleClick(numberClicked) {
+  function handleClick(numberClicked) {
     console.log("Click!");
-    console.log(this.clicked.length);
+    // console.log(this.state);
 
     //if time elapsed is greater than zero, there should be a game running
-    if (this.state.timeElapsed > 0) {
+    if (timeElapsed > 0) {
       // then check if the clicked number is the right one
-      if (
-        this.clicked.length === numberClicked - 1 &&
-        this.state.isRunning === true
-      )
+      if (clicked.length === numberClicked - 1 && isRunning === true)
         // add it to the array of clicked numbers
-        this.clicked.push(numberClicked);
+        clicked.push(numberClicked);
 
       // check if the 50th number was clicked
-      if (this.clicked.length === 50) {
-        this.win();
+      if (clicked.length === 50) {
+        win();
       }
       //console.log(numberClicked, this.clicked, this.clicked.length);
 
@@ -71,28 +67,24 @@ export default class GameGrid extends React.Component {
     }
 
     //when no game is running
-    if (!this.interval && this.clicked.length === numberClicked - 1) {
+    if (!interval && clicked.length === numberClicked - 1) {
       console.log("GameStart!");
-      this.setState({
-        timeElapsed: 0,
-        date: Date.now(),
-        isRunning: true,
-      });
-      this.interval = setInterval(this.updateTime, 10);
-      this.clicked.push(numberClicked);
+      setTimeElapsed(0);
+      setDate(Date.now());
+      setIsRunning(true);
+      interval = setInterval(updateTime, 10);
+      clicked.push(numberClicked);
       return;
     }
   }
 
-  handleNewGame() {
-    this.clicked = [];
-    this.setState({
-      timeElapsed: 0,
-      gameNumbers: this.newGame(SIZE),
-    });
+  function handleNewGame() {
+    setClicked([]);
+    setTimeElapsed(0);
+    setGameNumbers(newGame(SIZE));
   }
 
-  newGame(size) {
+  function newGame(size) {
     let numbers1 = [];
     let numbers2 = [];
 
@@ -104,12 +96,12 @@ export default class GameGrid extends React.Component {
     }
     numbers2.push(50);
     return {
-      first: this.shuffle(numbers1),
-      second: numbers2,
+      first: shuffle(numbers1),
+      second: shuffle(numbers2),
     };
   }
 
-  shuffle(array) {
+  function shuffle(array) {
     var currentIndex = array.length,
       temporaryValue,
       randomIndex;
@@ -129,29 +121,19 @@ export default class GameGrid extends React.Component {
     return array;
   }
 
-  propClick(num) {
+  function propClick(num) {
     console.log("Clicked!!");
     console.log(num);
   }
 
-  render() {
-    return (
-      <>
-        <Time
-          className="time-container"
-          id="timer"
-          timeElapsed={this.state.timeElapsed}
-        />
-        <Grid
-          clickAction={this.handleClick}
-          numbers={this.state.gameNumbers}
-          clicked={this.clicked}
-        />
-        <Buttons
-          stopAction={() => this.stopGame()}
-          newAction={() => this.handleNewGame()}
-        />
-      </>
-    );
-  }
+  return (
+    <>
+      <Time className="time-container" id="timer" timeElapsed={timeElapsed} />
+      <Grid clickAction={handleClick} numbers={gameNumbers} clicked={clicked} />
+      <Buttons
+        stopAction={() => stopGame()}
+        newAction={() => handleNewGame()}
+      />
+    </>
+  );
 }

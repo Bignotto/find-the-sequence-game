@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import "./index.css";
 
 export default function Grid(props) {
-  console.log(props.numbers);
   return (
     <div className="game-container">
       <div className="game-grid">
